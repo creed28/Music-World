@@ -5,9 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "Products")
+@Table(name = "products")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,5 +32,13 @@ public class Product {
 
     private String image;
 
-    private Long categoryId;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @OneToMany(mappedBy = "product")
+    private Set<OrderProduct> orderProducts;
+
+    @OneToMany(mappedBy = "product")
+    private Set<CartProduct> cartProducts;
 }

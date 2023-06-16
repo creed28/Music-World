@@ -5,16 +5,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "appUser")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "username", unique = true)
@@ -24,5 +26,12 @@ public class User {
 
     private String password;
 
-    private String role;
+    @OneToMany(mappedBy = "appUser")
+    private Set<Order> orders;
+
+    @OneToMany(mappedBy = "appUser")
+    private Set<Review> reviews;
+
+    @OneToOne(mappedBy = "appUser")
+    private Cart cart;
 }

@@ -5,9 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "OrderProducts")
+@Table(name = "orderProducts")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,9 +18,13 @@ public class OrderProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long orderId;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-    private Long productId;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     private Integer quantity;
 
@@ -30,4 +35,7 @@ public class OrderProduct {
     private String image;
 
     private String brand;
+
+    @OneToMany(mappedBy = "orderProduct")
+    private Set<Review> reviews;
 }

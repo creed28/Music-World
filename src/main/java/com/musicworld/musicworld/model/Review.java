@@ -3,12 +3,13 @@ package com.musicworld.musicworld.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
-@Table(name = "Reviews")
+@Table(name = "reviews")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,9 +19,9 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long orderProductId;
-
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "orderProduct_id")
+    private OrderProduct orderProduct;
 
     private Integer rating;
 
@@ -28,5 +29,10 @@ public class Review {
 
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime createdAt;
+    @CreatedDate
+    private Date createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "appUser_id")
+    private AppUser appUser;
 }
