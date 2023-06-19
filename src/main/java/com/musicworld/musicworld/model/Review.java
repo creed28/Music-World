@@ -32,7 +32,7 @@ public class Review {
     @CreatedDate
     private Date createdAt;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "appUser_id")
     private AppUser appUser;
 }
