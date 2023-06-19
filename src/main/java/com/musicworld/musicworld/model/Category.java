@@ -21,7 +21,7 @@ public class Category extends BaseModel {
     @JoinColumn(name="parentCategory")
     private Category parentCategory;
 
-    @OneToMany(mappedBy="subCategories", orphanRemoval = true)
+    @OneToMany(mappedBy="parentCategory", orphanRemoval = true, cascade = CascadeType.ALL)
     private Set<Category> subCategories;
 
     @OneToMany(mappedBy = "category")

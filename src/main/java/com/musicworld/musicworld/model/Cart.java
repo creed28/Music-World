@@ -15,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cart extends BaseModel {
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "appUser_id", referencedColumnName = "id", unique = true)
     private AppUser appUser;
 

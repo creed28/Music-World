@@ -28,6 +28,6 @@ public class AppUser extends BaseModel{
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
     private Set<Review> reviews;
 
-    @OneToOne(mappedBy = "appUser")
+    @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)
     private Cart cart;
 }
