@@ -2,6 +2,7 @@ package com.musicworld.musicworld.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,15 +10,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "orderProducts")
+@EqualsAndHashCode(callSuper = false)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderProduct {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class OrderProduct extends BaseModel {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;

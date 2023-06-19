@@ -2,6 +2,7 @@ package com.musicworld.musicworld.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,15 +10,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "products")
+@EqualsAndHashCode(callSuper = false)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Product extends BaseModel{
     private String name;
 
     private Double price;

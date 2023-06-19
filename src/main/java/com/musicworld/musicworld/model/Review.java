@@ -2,6 +2,7 @@ package com.musicworld.musicworld.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -10,15 +11,11 @@ import java.util.Date;
 
 @Entity
 @Table(name = "reviews")
+@EqualsAndHashCode(callSuper = false)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Review {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Review extends BaseModel{
     @ManyToOne
     @JoinColumn(name = "orderProduct_id")
     private OrderProduct orderProduct;
