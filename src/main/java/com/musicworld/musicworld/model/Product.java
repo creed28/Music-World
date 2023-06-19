@@ -36,6 +36,6 @@ public class Product extends BaseModel{
     @OneToMany(mappedBy = "product")
     private Set<OrderProduct> orderProducts;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<CartProduct> cartProducts;
 }

@@ -19,6 +19,6 @@ public class Cart extends BaseModel {
     @JoinColumn(name = "appUser_id", referencedColumnName = "id", unique = true)
     private AppUser appUser;
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     private Set<CartProduct> cartProducts;
 }

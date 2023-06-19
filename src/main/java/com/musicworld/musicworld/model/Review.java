@@ -29,7 +29,7 @@ public class Review extends BaseModel{
     @CreatedDate
     private Date createdAt;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "appUser_id")
     private AppUser appUser;
 }

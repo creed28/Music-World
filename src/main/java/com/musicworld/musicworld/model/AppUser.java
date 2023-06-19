@@ -25,7 +25,7 @@ public class AppUser extends BaseModel{
     @OneToMany(mappedBy = "appUser")
     private Set<Order> orders;
 
-    @OneToMany(mappedBy = "appUser")
+    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
     private Set<Review> reviews;
 
     @OneToOne(mappedBy = "appUser")

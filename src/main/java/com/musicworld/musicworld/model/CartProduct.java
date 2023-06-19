@@ -14,11 +14,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartProduct extends BaseModel{
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 

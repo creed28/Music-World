@@ -17,11 +17,11 @@ import java.util.Set;
 public class Category extends BaseModel {
     private String name;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="parentCategory")
     private Category parentCategory;
 
-    @OneToMany(mappedBy="subCategories")
+    @OneToMany(mappedBy="subCategories", orphanRemoval = true)
     private Set<Category> subCategories;
 
     @OneToMany(mappedBy = "category")
