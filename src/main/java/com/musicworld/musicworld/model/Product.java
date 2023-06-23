@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity(name = "product")
+@Entity
 @Table(name = "products")
 @EqualsAndHashCode(callSuper = false)
 @Data
