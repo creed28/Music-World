@@ -1,12 +1,12 @@
 package com.musicworld.musicworld.repository;
 
-import com.musicworld.musicworld.model.Product;
+import com.musicworld.musicworld.model.Cart;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ProductRepository extends ParentRepository<Product> {
+public class CartRepository extends ParentRepository<Cart> {
     @Override
     public String getEntityName() {
-        return Product.class.getSimpleName();
+        return Cart.class.getSimpleName();
     }
 }
