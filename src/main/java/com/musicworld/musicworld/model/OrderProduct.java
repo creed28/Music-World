@@ -14,7 +14,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderProduct extends BaseModel {
+public class OrderProduct extends ProductModel {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
@@ -22,20 +22,6 @@ public class OrderProduct extends BaseModel {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
-    private String name;
-
-    private Integer quantity;
-
-    private Double price;
-
-    private String description;
-
-    private String image;
-
-    private Double discount;
-
-    private String brand;
 
     @OneToMany(mappedBy = "orderProduct")
     private Set<Review> reviews;

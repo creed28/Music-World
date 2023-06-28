@@ -14,20 +14,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product extends BaseModel{
-    private String name;
-
-    private Double price;
-
-    private Integer quantity;
-
-    private Double discount;
-
-    private String description;
-
-    private String brand;
-
-    private String image;
+public class Product extends ProductModel{
 
     @ManyToOne
     @JoinColumn(name = "category_id")
