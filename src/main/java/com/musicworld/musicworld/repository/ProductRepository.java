@@ -5,8 +5,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ProductRepository extends ParentRepository<Product> {
+
     @Override
-    public String getEntityName() {
-        return Product.class.getSimpleName();
+    public Class<Product> getEntityClass(){
+        return Product.class;
     }
+
 }

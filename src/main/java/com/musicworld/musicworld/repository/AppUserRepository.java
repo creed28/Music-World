@@ -5,8 +5,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class AppUserRepository extends ParentRepository<AppUser> {
+
     @Override
-    public String getEntityName() {
-        return AppUser.class.getSimpleName();
+    public Class<AppUser> getEntityClass(){
+        return AppUser.class;
     }
+
 }

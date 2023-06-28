@@ -2,31 +2,31 @@ package com.musicworld.musicworld.repository;
 
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
 public abstract class ParentRepository<T> {
-    @PersistenceUnit
-    private EntityManagerFactory entityManagerFactory;
 
-    public abstract String getEntityName();
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    @PostConstruct
+    protected abstract Class<T> getEntityClass();
+
     public List<T> findAll(){
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        return entityManager.createQuery("from " + getEntityName()).getResultList();
+        return entityManager.createQuery("from " + getEntityClass().getSimpleName()).getResultList();
+    }
+
+   public T findById(Long id){
+        return entityManager.find(getEntityClass(), id);
     }
 
     @Transactional
-    public void create(T object){
+    public void create(T entity){
         try {
-            EntityManager entityManager = entityManagerFactory.createEntityManager();
-            entityManager.persist(object);
+            entityManager.persist(entity);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -34,11 +34,19 @@ public abstract class ParentRepository<T> {
     }
 
     @Transactional
-    public void delete(long id) {
+    public void update(T entity){
+        try {
+            entityManager.merge(entity);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Transactional
+    public void delete(Long id) {
         try{
-            EntityManager entityManager = entityManagerFactory.createEntityManager();
-            entityManager.createQuery("delete from :type where id = :id")
-                    .setParameter("type", getEntityName())
+            entityManager.createQuery("delete from " + getEntityClass().getSimpleName() + " where id = :id")
                     .setParameter("id", id)
                     .executeUpdate();
         }

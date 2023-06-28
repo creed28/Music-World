@@ -23,6 +23,8 @@ public class OrderProduct extends BaseModel {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    private String name;
+
     private Integer quantity;
 
     private Double price;
@@ -30,6 +32,8 @@ public class OrderProduct extends BaseModel {
     private String description;
 
     private String image;
+
+    private Double discount;
 
     private String brand;
 
