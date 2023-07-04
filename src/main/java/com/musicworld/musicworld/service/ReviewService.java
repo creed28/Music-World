@@ -13,30 +13,23 @@ public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    public void getReviews() {
-        List<Review> reviewList = reviewRepository.findAll();
-        for (Review review : reviewList) {
-            System.out.println(review.getComment());
-        }
+    public List<Review> getReviews() {
+        return reviewRepository.findAll();
     }
 
-    public void getReviewById(Long id) {
-        Review review = reviewRepository.findById(id);
-        System.out.println(review.getComment());
+    public Review getReviewById(Long id) {
+        return reviewRepository.findById(id);
     }
 
-    public void createReview(Review review) {
-        reviewRepository.create(review);
-        getReviews();
+    public Review createReview(Review review) {
+        return reviewRepository.create(review);
     }
 
-    public void updateReview(Review existingReview) {
-        reviewRepository.update(existingReview);
-        getReviews();
+    public Review updateReview(Review existingReview) {
+        return reviewRepository.update(existingReview);
     }
 
     public void deleteReview(Long id) {
         reviewRepository.delete(id);
-        getReviews();
     }
 }

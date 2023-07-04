@@ -13,30 +13,23 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public void getCategories() {
-        List<Category> categoryList = categoryRepository.findAll();
-        for (Category category : categoryList) {
-            System.out.println(category.getName());
-        }
+    public List<Category> getCategories() {
+        return categoryRepository.findAll();
     }
 
-    public void getCategoryById(Long id) {
-        Category category = categoryRepository.findById(id);
-        System.out.println(category.getName());
+    public Category getCategoryById(Long id) {
+        return categoryRepository.findById(id);
     }
 
-    public void createCategory(Category category) {
-        categoryRepository.create(category);
-        getCategories();
+    public Category createCategory(Category category) {
+        return categoryRepository.create(category);
     }
 
-    public void updateCategory(Category existingCategory) {
-        categoryRepository.update(existingCategory);
-        getCategories();
+    public Category updateCategory(Category existingCategory) {
+        return categoryRepository.update(existingCategory);
     }
 
     public void deleteCategory(Long id) {
         categoryRepository.delete(id);
-        getCategories();
     }
 }

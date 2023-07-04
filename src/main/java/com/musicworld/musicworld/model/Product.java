@@ -25,9 +25,4 @@ public class Product extends ProductModel{
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<CartProduct> cartProducts;
-
-//    public Product(String name, String description){
-//        this.name = name;
-//        this.description = description;
-//    }
 }

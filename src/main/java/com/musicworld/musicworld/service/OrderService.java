@@ -13,21 +13,23 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    public void getOrders() {
-        List<Order> orderList = orderRepository.findAll();
-        for (Order order : orderList) {
-            System.out.println(order.getTotalPrice());
-        }
+    public List<Order> getOrders() {
+        return orderRepository.findAll();
     }
 
-    public void getOrderById(Long id) {
-        Order order = orderRepository.findById(id);
-        System.out.println(order.getTotalPrice());
+    public Order getOrderById(Long id) {
+        return orderRepository.findById(id);
     }
 
-    public void createOrder(Order order) {
-        orderRepository.create(order);
-        getOrders();
+    public Order createOrder(Order order) {
+        return orderRepository.create(order);
     }
 
+    public Order updateOrder(Order existingOrder) {
+        return orderRepository.update(existingOrder);
+    }
+
+    public void deleteOrder(Long id) {
+        orderRepository.delete(id);
+    }
 }

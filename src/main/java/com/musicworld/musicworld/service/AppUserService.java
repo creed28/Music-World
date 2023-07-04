@@ -5,25 +5,28 @@ import com.musicworld.musicworld.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AppUserService {
 
     @Autowired
     private AppUserRepository appUserRepository;
 
-    public void getAppUserById(Long id) {
-        AppUser appUser = appUserRepository.findById(id);
-        System.out.println(appUser.getUsername());
+    public List<AppUser> getAppUsers() {
+        return appUserRepository.findAll();
     }
 
-    public void createAppUser(AppUser appUser) {
-        appUserRepository.create(appUser);
-        getAppUserById(appUser.getId());
+    public AppUser getAppUserById(Long id) {
+        return appUserRepository.findById(id);
     }
 
-    public void updateAppUser(AppUser existingAppUser) {
-        appUserRepository.update(existingAppUser);
-        getAppUserById(existingAppUser.getId());
+    public AppUser createAppUser(AppUser appUser) {
+        return appUserRepository.create(appUser);
+    }
+
+    public AppUser updateAppUser(AppUser existingAppUser) {
+        return appUserRepository.update(existingAppUser);
     }
 
     public void deleteAppUser(Long id) {

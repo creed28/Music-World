@@ -24,23 +24,25 @@ public abstract class ParentRepository<T> {
     }
 
     @Transactional
-    public void create(T entity){
+    public T create(T entity){
         try {
             entityManager.persist(entity);
         }
         catch (Exception e){
             e.printStackTrace();
         }
+        return entity;
     }
 
     @Transactional
-    public void update(T entity){
+    public T update(T entity){
         try {
             entityManager.merge(entity);
         }
         catch (Exception e){
             e.printStackTrace();
         }
+        return entity;
     }
 
     @Transactional

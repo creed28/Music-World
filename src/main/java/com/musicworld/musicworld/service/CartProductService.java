@@ -13,25 +13,23 @@ public class CartProductService {
     @Autowired
     private CartProductRepository cartProductRepository;
 
-    public void getCartProducts() {
-        List<CartProduct> cartProductList = cartProductRepository.findAll();
-        for (CartProduct cartProduct : cartProductList) {
-            System.out.println(cartProduct.getProduct().getName());
-        }
+    public List<CartProduct> getCartProducts() {
+        return cartProductRepository.findAll();
     }
 
-    public void createCartProduct(CartProduct cartProduct) {
-        cartProductRepository.create(cartProduct);
-        getCartProducts();
+    public CartProduct getCartProductById(Long id) {
+        return cartProductRepository.findById(id);
     }
 
-    public void updateCartProduct(CartProduct existingCartProduct) {
-        cartProductRepository.update(existingCartProduct);
-        getCartProducts();
+    public CartProduct createCartProduct(CartProduct cartProduct) {
+        return cartProductRepository.create(cartProduct);
+    }
+
+    public CartProduct updateCartProduct(CartProduct existingCartProduct) {
+        return cartProductRepository.update(existingCartProduct);
     }
 
     public void deleteCartProduct(Long id) {
         cartProductRepository.delete(id);
-        getCartProducts();
     }
 }

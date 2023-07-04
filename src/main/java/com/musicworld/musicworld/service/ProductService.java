@@ -13,30 +13,23 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public void getProducts() {
-        List<Product> productList = productRepository.findAll();
-        for (Product product : productList) {
-            System.out.println(product.getName());
-        }
+    public List<Product> getProducts() {
+        return productRepository.findAll();
     }
 
-    public void getProductById(Long id) {
-        Product product = productRepository.findById(id);
-        System.out.println(product.getName());
+    public Product getProductById(Long id) {
+        return productRepository.findById(id);
     }
 
-    public void createProduct(Product product) {
-        productRepository.create(product);
-        getProducts();
+    public Product createProduct(Product product) {
+        return productRepository.create(product);
     }
 
-    public void updateProduct(Product existingProduct) {
-        productRepository.update(existingProduct);
-        getProducts();
+    public Product updateProduct(Product existingProduct) {
+        return productRepository.update(existingProduct);
     }
 
     public void deleteProduct(Long id) {
         productRepository.delete(id);
-        getProducts();
     }
 }

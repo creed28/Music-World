@@ -1,7 +1,6 @@
 package com.musicworld.musicworld.repository;
 
 import com.musicworld.musicworld.model.Order;
-import com.musicworld.musicworld.model.Product;
 import org.springframework.stereotype.Repository;
 
 @Repository
