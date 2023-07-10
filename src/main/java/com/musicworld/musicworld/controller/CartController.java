@@ -1,11 +1,13 @@
 package com.musicworld.musicworld.controller;
 
-import com.musicworld.musicworld.model.Cart;
+import com.musicworld.musicworld.converter.CartConverter;
+import com.musicworld.musicworld.dto.CartDTO;
 import com.musicworld.musicworld.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/carts")
@@ -13,24 +15,33 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
+    @Autowired
+    private CartConverter cartConverter;
+
     @GetMapping("/all")
-    public List<Cart> getAllCarts(){
-        return cartService.getCarts();
+    public List<CartDTO> getAllCarts(){
+        return cartService.getCarts().stream().map(cart -> cartConverter.convertEntityToDto(cart))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/cart/{id}")
-    public Cart getCartById(@PathVariable Long id){
-        return cartService.getCartById(id);
+    public CartDTO getCart(@PathVariable Long id){
+        if(cartService.getCartById(id) == null){
+            return null;
+        }
+        return cartConverter.convertEntityToDto(cartService.getCartById(id));
     }
 
     @PostMapping("/add")
-    public Cart addCart(@RequestBody Cart cart){
-        return cartService.createCart(cart);
+    public CartDTO addCart(@RequestBody CartDTO cartDTO){
+        return cartConverter.convertEntityToDto(cartService.createCart
+                (cartConverter.convertDtoToEntity(cartDTO)));
     }
 
     @PutMapping("/update")
-    public Cart updateCart(@RequestBody Cart existingCart){
-        return cartService.updateCart(existingCart);
+    public CartDTO updateCart(@RequestBody CartDTO cartDTO){
+        return cartConverter.convertEntityToDto(cartService.updateCart
+                (cartConverter.convertDtoToEntity(cartDTO)));
     }
 
     @DeleteMapping("/delete/{id}")
