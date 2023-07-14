@@ -24,9 +24,16 @@ public class AppUserConverter {
     public AppUser convertDtoToEntity(AppUserDTO appUserDTO){
         ModelMapper modelMapper = new ModelMapper();
         AppUser map = modelMapper.map(appUserDTO, AppUser.class);
-        AppUser existingAppUser = appUserService.getAppUserById(appUserDTO.getId());
+        if(appUserDTO.getId() != null) {
+            AppUser existingAppUser = appUserService.getAppUserById(appUserDTO.getId());
+            checkAppUserFields(appUserDTO, map, existingAppUser);
+        }
+        return map;
+    }
+
+    private void checkAppUserFields(AppUserDTO appUserDTO, AppUser map, AppUser existingAppUser) {
         if(appUserDTO.getUsername() == null){
-           map.setUsername(existingAppUser.getUsername());
+            map.setUsername(existingAppUser.getUsername());
         }
         if(appUserDTO.getEmail() == null){
             map.setEmail(existingAppUser.getEmail());
@@ -34,6 +41,5 @@ public class AppUserConverter {
         if(appUserDTO.getPassword() == null){
             map.setPassword(existingAppUser.getPassword());
         }
-        return map;
     }
 }

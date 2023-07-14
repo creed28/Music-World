@@ -32,19 +32,19 @@ public class AppUserController {
     }
 
     @PostMapping("/add")
-    public AppUserDTO addRecord(@RequestBody AppUserDTO appUserDTO){
+    public AppUserDTO addAppUser(@RequestBody AppUserDTO appUserDTO){
         return appUserConverter.convertEntityToDto(appUserService.createAppUser
                 (appUserConverter.convertDtoToEntity(appUserDTO)));
     }
 
     @PutMapping("/update")
-    public AppUserDTO updateRecord(@RequestBody AppUserDTO appUserDTO){
+    public AppUserDTO updateAppUser(@RequestBody AppUserDTO appUserDTO){
         return appUserConverter.convertEntityToDto(appUserService.updateAppUser
                 (appUserConverter.convertDtoToEntity(appUserDTO)));
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteRecord(@PathVariable Long id){
+    public void deleteAppUser(@PathVariable Long id){
         appUserService.deleteAppUser(id);
     }
 }
