@@ -1,11 +1,13 @@
 package com.musicworld.musicworld.controller;
 
-import com.musicworld.musicworld.model.Order;
+import com.musicworld.musicworld.converter.OrderConverter;
+import com.musicworld.musicworld.dto.OrderDTO;
 import com.musicworld.musicworld.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/orders")
@@ -13,24 +15,33 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private OrderConverter orderConverter;
+
     @GetMapping("/all")
-    public List<Order> getAllOrders(){
-        return orderService.getOrders();
+    public List<OrderDTO> getAllOrders(){
+        return orderService.getOrders().stream().map(order -> orderConverter.convertEntityToDto(order))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/order/{id}")
-    public Order getOrder(@PathVariable Long id){
-        return orderService.getOrderById(id);
+    public OrderDTO getOrder(@PathVariable Long id){
+        if(orderService.getOrderById(id) == null){
+            return null;
+        }
+        return orderConverter.convertEntityToDto(orderService.getOrderById(id));
     }
 
     @PostMapping("/add")
-    public Order addOrder(@RequestBody Order order){
-        return orderService.createOrder(order);
+    public OrderDTO addOrder(@RequestBody OrderDTO orderDTO){
+        return orderConverter.convertEntityToDto(orderService.createOrder
+                (orderConverter.convertDtoToEntity(orderDTO)));
     }
 
     @PutMapping("/update")
-    public Order updateOrder(@RequestBody Order existingOrder){
-        return orderService.updateOrder(existingOrder);
+    public OrderDTO updateOrder(@RequestBody OrderDTO orderDTO){
+        return orderConverter.convertEntityToDto(orderService.updateOrder
+                (orderConverter.convertDtoToEntity(orderDTO)));
     }
 
     @DeleteMapping("/delete/{id}")

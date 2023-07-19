@@ -1,12 +1,9 @@
 package com.musicworld.musicworld.converter;
 
-import com.musicworld.musicworld.dto.AppUserDTO;
 import com.musicworld.musicworld.dto.CategoryDTO;
-import com.musicworld.musicworld.model.AppUser;
 import com.musicworld.musicworld.model.Category;
 import com.musicworld.musicworld.service.CategoryService;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

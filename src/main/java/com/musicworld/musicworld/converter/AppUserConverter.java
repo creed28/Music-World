@@ -8,17 +8,29 @@ import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collectors;
+
 @Component
 public class AppUserConverter {
 
     @Autowired
     private AppUserService appUserService;
 
+    @Autowired
+    private OrderConverter orderConverter;
+
     public AppUserDTO convertEntityToDto(AppUser appUser){
         ModelMapper modelMapper = new ModelMapper();
         TypeMap<AppUser, AppUserDTO> typeMap = modelMapper.createTypeMap(AppUser.class, AppUserDTO.class);
         typeMap.addMappings(mapper -> mapper.skip((AppUserDTO::setPassword)));
-        return modelMapper.map(appUser, AppUserDTO.class);
+        AppUserDTO map = modelMapper.map(appUser, AppUserDTO.class);
+        if(appUser.getOrders() != null) {
+            map.setOrders(appUser.getOrders()
+                    .stream()
+                    .map(order -> orderConverter.convertEntityToDto(order))
+                    .collect(Collectors.toSet()));
+        }
+        return map;
     }
 
     public AppUser convertDtoToEntity(AppUserDTO appUserDTO){
@@ -40,6 +52,9 @@ public class AppUserConverter {
         }
         if(appUserDTO.getPassword() == null){
             map.setPassword(existingAppUser.getPassword());
+        }
+        if(appUserDTO.getOrders() == null){
+            map.setOrders(existingAppUser.getOrders());
         }
     }
 }

@@ -1,16 +1,15 @@
 package com.musicworld.musicworld.dto;
 
+import com.musicworld.musicworld.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class CartDTO {
+@NoArgsConstructor
+public class CartProductDTO {
     private Long id;
-    private AppUserDTO appUser;
-    private Set<CartProductDTO> cartProducts;
+    private Integer quantity;
+    private Product product;
 }

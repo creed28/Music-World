@@ -19,7 +19,7 @@ public class ProductConverter {
     public ProductDTO convertEntityToDto(Product product){
         ModelMapper modelMapper = new ModelMapper();
         ProductDTO map = modelMapper.map(product, ProductDTO.class);
-        if(map.getCategory() != null) {
+        if(product.getCategory() != null) {
             map.setCategory(categoryConverter.convertEntityToDto(product.getCategory()));
         }
         return map;

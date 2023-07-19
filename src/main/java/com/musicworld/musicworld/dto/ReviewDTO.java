@@ -4,13 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class CartDTO {
+@NoArgsConstructor
+public class ReviewDTO {
     private Long id;
+    private Double rating;
+    private String comment;
+    private String createdAt;
     private AppUserDTO appUser;
-    private Set<CartProductDTO> cartProducts;
 }

@@ -9,10 +9,10 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AppUserDTO{
+public class OrderDTO {
     private Long id;
-    private String username;
-    private String email;
-    private String password;
-    private Set<OrderDTO> orders;
+    private Double totalPrice;
+    private Double discount;
+    private String createdAt;
+    private Set<OrderProductDTO> orderProducts;
 }

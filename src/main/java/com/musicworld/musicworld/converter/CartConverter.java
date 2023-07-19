@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
 public class CartConverter {
 
     @Autowired
-    private CartService cartService;
-    @Autowired
     private AppUserConverter appUserConverter;
 
     public CartDTO convertEntityToDto(Cart cart){
