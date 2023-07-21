@@ -11,6 +11,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class OrderDTO {
     private Long id;
+    private AppUserDTO appUser;
     private Double totalPrice;
     private Double discount;
     private String createdAt;
